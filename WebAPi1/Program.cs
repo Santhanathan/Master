@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
+using WebApplication1.Repositires;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,8 @@ builder.Services.AddDbContext<NzWalksDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("NZWalks"));
 }); 
 
+builder.Services.AddScoped<IRegionRepository,RegionRepository>();
+builder.Services.AddAutoMapper(typeof(Program));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
